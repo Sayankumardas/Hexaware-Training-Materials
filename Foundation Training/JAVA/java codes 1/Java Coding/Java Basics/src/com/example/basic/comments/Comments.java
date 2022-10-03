@@ -1,0 +1,27 @@
+package com.example.basic.comments;
+
+public class Comments {
+	
+	public static void main(String[] args) {
+		
+		//This is single line commenting
+		
+		/*
+		 * Multiple line commenting
+		 * 
+		 * */
+		
+		
+	}
+	
+	
+	/**
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	public int add(int a,int b) {
+		return a+b;
+	}
+
+}

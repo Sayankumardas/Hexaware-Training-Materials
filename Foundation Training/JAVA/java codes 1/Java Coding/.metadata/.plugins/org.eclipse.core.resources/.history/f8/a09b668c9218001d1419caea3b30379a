@@ -1,0 +1,7 @@
+package com.example.basic.access.specifiers.child;
+
+import com.example.basic.access.specifiers.Person;
+
+public class PersonChild extends Person {
+
+}

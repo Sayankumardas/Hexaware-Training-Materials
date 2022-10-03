@@ -1,0 +1,698 @@
+apurvsirohi@Apurvs-MacBook-Pro ~ % mongo
+MongoDB shell version v5.0.7
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("e4c60453-8fbd-4f62-bcc9-9093815691db") }
+MongoDB server version: 4.4.13
+WARNING: shell and server versions do not match
+================
+Warning: the "mongo" shell has been superseded by "mongosh",
+which delivers improved usability and compatibility.The "mongo" shell has been deprecated and will be removed in
+an upcoming release.
+For installation instructions, see
+https://docs.mongodb.com/mongodb-shell/install/
+================
+---
+The server generated these startup warnings when booting: 
+        2022-08-05T10:19:42.931+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> use mongoDB;
+switched to db mongoDB
+> db
+mongoDB
+> use mongoDBTest;
+switched to db mongoDBTest
+> db
+mongoDBTest
+> show dbs;
+admin     0.000GB
+config    0.000GB
+local     0.000GB
+sampleDB  0.000GB
+> use mongoDB;
+switched to db mongoDB
+> db
+mongoDB
+> show collections;
+> use sampleDB;
+switched to db sampleDB
+> show collections;
+emp
+> use mongoDB;
+switched to db mongoDB
+> db
+mongoDB
+> show collections;
+> db.createCollection("student");
+{ "ok" : 1 }
+> show collections;
+student
+> show collections;
+student
+> db.emp.insert()
+uncaught exception: Error: no object passed to insert! :
+DBCollection.prototype.insert@src/mongo/shell/collection.js:275:15
+@(shell):1:1
+> db.emp.insert({"name":"Uma"});
+WriteResult({ "nInserted" : 1 })
+> show collections;
+emp
+student
+> db.emp.insert({"name":"Rajesh","age":25});
+WriteResult({ "nInserted" : 1 })
+> show collections;
+emp
+student
+> show dbs;
+admin     0.000GB
+config    0.000GB
+local     0.000GB
+mongoDB   0.000GB
+sampleDB  0.000GB
+> db
+mongoDB
+> use mongoDBTest
+switched to db mongoDBTest
+> db
+mongoDBTest
+> db.createCollection("student")
+{ "ok" : 1 }
+> show collections
+student
+> show dbs
+admin        0.000GB
+config       0.000GB
+local        0.000GB
+mongoDB      0.000GB
+mongoDBTest  0.000GB
+sampleDB     0.000GB
+> db
+mongoDBTest
+> db.dropDatabase()
+{ "dropped" : "mongoDBTest", "ok" : 1 }
+> show dbs
+admin     0.000GB
+config    0.000GB
+local     0.000GB
+mongoDB   0.000GB
+sampleDB  0.000GB
+> db
+mongoDBTest
+> db.dropDatabase()
+{ "ok" : 1 }
+> use mongoDB
+switched to db mongoDB
+> db
+mongoDB
+> show collections
+emp
+student
+> db.test.insert({"name":"sample"})
+WriteResult({ "nInserted" : 1 })
+> show collections
+emp
+student
+test
+> db.test.drop()
+true
+> show collections
+emp
+student
+> db.emp.find()
+{ "_id" : ObjectId("62f1ef4c75a53992a62c2294"), "name" : "Uma" }
+{ "_id" : ObjectId("62f1ef7a75a53992a62c2295"), "name" : "Rajesh", "age" : 25 }
+> db.student.insert({})
+WriteResult({ "nInserted" : 1 })
+> db.emp.find()
+{ "_id" : ObjectId("62f1ef4c75a53992a62c2294"), "name" : "Uma" }
+{ "_id" : ObjectId("62f1ef7a75a53992a62c2295"), "name" : "Rajesh", "age" : 25 }
+> db.student.insert({"name":"Chaaru","details":{"age":19,"standard":"X"},"Batch":[{"size":"small","qty":15},{"size":"Medium","qty":25}],"category":"Science"})
+WriteResult({ "nInserted" : 1 })
+> db.emp.find()
+{ "_id" : ObjectId("62f1ef4c75a53992a62c2294"), "name" : "Uma" }
+{ "_id" : ObjectId("62f1ef7a75a53992a62c2295"), "name" : "Rajesh", "age" : 25 }
+> db.student.find()
+{ "_id" : ObjectId("62f1f1c375a53992a62c2297") }
+{ "_id" : ObjectId("62f1f25075a53992a62c2298"), "name" : "Chaaru", "details" : { "age" : 19, "standard" : "X" }, "Batch" : [ { "size" : "small", "qty" : 15 }, { "size" : "Medium", "qty" : 25 } ], "category" : "Science" }
+> db.student.insertMany([{"FirstName":"Radhika","LastName":"Sharma","DOB":"1995-09-09","email":"rsharma@gmail.com"},{"FirstName":"Rachael","DOB":"1990-08-08","phone":"1234567890"}])
+{
+	"acknowledged" : true,
+	"insertedIds" : [
+		ObjectId("62f1f2f875a53992a62c2299"),
+		ObjectId("62f1f2f875a53992a62c229a")
+	]
+}
+> db.student.find()
+{ "_id" : ObjectId("62f1f1c375a53992a62c2297") }
+{ "_id" : ObjectId("62f1f25075a53992a62c2298"), "name" : "Chaaru", "details" : { "age" : 19, "standard" : "X" }, "Batch" : [ { "size" : "small", "qty" : 15 }, { "size" : "Medium", "qty" : 25 } ], "category" : "Science" }
+{ "_id" : ObjectId("62f1f2f875a53992a62c2299"), "FirstName" : "Radhika", "LastName" : "Sharma", "DOB" : "1995-09-09", "email" : "rsharma@gmail.com" }
+{ "_id" : ObjectId("62f1f2f875a53992a62c229a"), "FirstName" : "Rachael", "DOB" : "1990-08-08", "phone" : "1234567890" }
+> var students = [{"name":"Devi","details":{"age":36,"standard":"ME"}},{"name":"Rashmi","category":"Medicine"}]
+> db.student.insert(students)
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 2,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.student.find()
+{ "_id" : ObjectId("62f1f1c375a53992a62c2297") }
+{ "_id" : ObjectId("62f1f25075a53992a62c2298"), "name" : "Chaaru", "details" : { "age" : 19, "standard" : "X" }, "Batch" : [ { "size" : "small", "qty" : 15 }, { "size" : "Medium", "qty" : 25 } ], "category" : "Science" }
+{ "_id" : ObjectId("62f1f2f875a53992a62c2299"), "FirstName" : "Radhika", "LastName" : "Sharma", "DOB" : "1995-09-09", "email" : "rsharma@gmail.com" }
+{ "_id" : ObjectId("62f1f2f875a53992a62c229a"), "FirstName" : "Rachael", "DOB" : "1990-08-08", "phone" : "1234567890" }
+{ "_id" : ObjectId("62f1f37b75a53992a62c229b"), "name" : "Devi", "details" : { "age" : 36, "standard" : "ME" } }
+{ "_id" : ObjectId("62f1f37b75a53992a62c229c"), "name" : "Rashmi", "category" : "Medicine" }
+> db.student.find().pretty()
+{ "_id" : ObjectId("62f1f1c375a53992a62c2297") }
+{
+	"_id" : ObjectId("62f1f25075a53992a62c2298"),
+	"name" : "Chaaru",
+	"details" : {
+		"age" : 19,
+		"standard" : "X"
+	},
+	"Batch" : [
+		{
+			"size" : "small",
+			"qty" : 15
+		},
+		{
+			"size" : "Medium",
+			"qty" : 25
+		}
+	],
+	"category" : "Science"
+}
+{
+	"_id" : ObjectId("62f1f2f875a53992a62c2299"),
+	"FirstName" : "Radhika",
+	"LastName" : "Sharma",
+	"DOB" : "1995-09-09",
+	"email" : "rsharma@gmail.com"
+}
+{
+	"_id" : ObjectId("62f1f2f875a53992a62c229a"),
+	"FirstName" : "Rachael",
+	"DOB" : "1990-08-08",
+	"phone" : "1234567890"
+}
+{
+	"_id" : ObjectId("62f1f37b75a53992a62c229b"),
+	"name" : "Devi",
+	"details" : {
+		"age" : 36,
+		"standard" : "ME"
+	}
+}
+{
+	"_id" : ObjectId("62f1f37b75a53992a62c229c"),
+	"name" : "Rashmi",
+	"category" : "Medicine"
+}
+> db.student.find().limit(3).pretty()
+{ "_id" : ObjectId("62f1f1c375a53992a62c2297") }
+{
+	"_id" : ObjectId("62f1f25075a53992a62c2298"),
+	"name" : "Chaaru",
+	"details" : {
+		"age" : 19,
+		"standard" : "X"
+	},
+	"Batch" : [
+		{
+			"size" : "small",
+			"qty" : 15
+		},
+		{
+			"size" : "Medium",
+			"qty" : 25
+		}
+	],
+	"category" : "Science"
+}
+{
+	"_id" : ObjectId("62f1f2f875a53992a62c2299"),
+	"FirstName" : "Radhika",
+	"LastName" : "Sharma",
+	"DOB" : "1995-09-09",
+	"email" : "rsharma@gmail.com"
+}
+> db.student.find().limit(2).skip(1).pretty()
+{
+	"_id" : ObjectId("62f1f25075a53992a62c2298"),
+	"name" : "Chaaru",
+	"details" : {
+		"age" : 19,
+		"standard" : "X"
+	},
+	"Batch" : [
+		{
+			"size" : "small",
+			"qty" : 15
+		},
+		{
+			"size" : "Medium",
+			"qty" : 25
+		}
+	],
+	"category" : "Science"
+}
+{
+	"_id" : ObjectId("62f1f2f875a53992a62c2299"),
+	"FirstName" : "Radhika",
+	"LastName" : "Sharma",
+	"DOB" : "1995-09-09",
+	"email" : "rsharma@gmail.com"
+}
+> db.student.find().limit(2).skip(2).pretty()
+{
+	"_id" : ObjectId("62f1f2f875a53992a62c2299"),
+	"FirstName" : "Radhika",
+	"LastName" : "Sharma",
+	"DOB" : "1995-09-09",
+	"email" : "rsharma@gmail.com"
+}
+{
+	"_id" : ObjectId("62f1f2f875a53992a62c229a"),
+	"FirstName" : "Rachael",
+	"DOB" : "1990-08-08",
+	"phone" : "1234567890"
+}
+> db.student.find()
+{ "_id" : ObjectId("62f1f1c375a53992a62c2297") }
+{ "_id" : ObjectId("62f1f25075a53992a62c2298"), "name" : "Chaaru", "details" : { "age" : 19, "standard" : "X" }, "Batch" : [ { "size" : "small", "qty" : 15 }, { "size" : "Medium", "qty" : 25 } ], "category" : "Science" }
+{ "_id" : ObjectId("62f1f2f875a53992a62c2299"), "FirstName" : "Radhika", "LastName" : "Sharma", "DOB" : "1995-09-09", "email" : "rsharma@gmail.com" }
+{ "_id" : ObjectId("62f1f2f875a53992a62c229a"), "FirstName" : "Rachael", "DOB" : "1990-08-08", "phone" : "1234567890" }
+{ "_id" : ObjectId("62f1f37b75a53992a62c229b"), "name" : "Devi", "details" : { "age" : 36, "standard" : "ME" } }
+{ "_id" : ObjectId("62f1f37b75a53992a62c229c"), "name" : "Rashmi", "category" : "Medicine" }
+> db.student.find().sort({"name":1}).pretty()
+{ "_id" : ObjectId("62f1f1c375a53992a62c2297") }
+{
+	"_id" : ObjectId("62f1f2f875a53992a62c2299"),
+	"FirstName" : "Radhika",
+	"LastName" : "Sharma",
+	"DOB" : "1995-09-09",
+	"email" : "rsharma@gmail.com"
+}
+{
+	"_id" : ObjectId("62f1f2f875a53992a62c229a"),
+	"FirstName" : "Rachael",
+	"DOB" : "1990-08-08",
+	"phone" : "1234567890"
+}
+{
+	"_id" : ObjectId("62f1f25075a53992a62c2298"),
+	"name" : "Chaaru",
+	"details" : {
+		"age" : 19,
+		"standard" : "X"
+	},
+	"Batch" : [
+		{
+			"size" : "small",
+			"qty" : 15
+		},
+		{
+			"size" : "Medium",
+			"qty" : 25
+		}
+	],
+	"category" : "Science"
+}
+{
+	"_id" : ObjectId("62f1f37b75a53992a62c229b"),
+	"name" : "Devi",
+	"details" : {
+		"age" : 36,
+		"standard" : "ME"
+	}
+}
+{
+	"_id" : ObjectId("62f1f37b75a53992a62c229c"),
+	"name" : "Rashmi",
+	"category" : "Medicine"
+}
+> db.student.find().sort({"name":-1}).pretty()
+{
+	"_id" : ObjectId("62f1f37b75a53992a62c229c"),
+	"name" : "Rashmi",
+	"category" : "Medicine"
+}
+{
+	"_id" : ObjectId("62f1f37b75a53992a62c229b"),
+	"name" : "Devi",
+	"details" : {
+		"age" : 36,
+		"standard" : "ME"
+	}
+}
+{
+	"_id" : ObjectId("62f1f25075a53992a62c2298"),
+	"name" : "Chaaru",
+	"details" : {
+		"age" : 19,
+		"standard" : "X"
+	},
+	"Batch" : [
+		{
+			"size" : "small",
+			"qty" : 15
+		},
+		{
+			"size" : "Medium",
+			"qty" : 25
+		}
+	],
+	"category" : "Science"
+}
+{ "_id" : ObjectId("62f1f1c375a53992a62c2297") }
+{
+	"_id" : ObjectId("62f1f2f875a53992a62c2299"),
+	"FirstName" : "Radhika",
+	"LastName" : "Sharma",
+	"DOB" : "1995-09-09",
+	"email" : "rsharma@gmail.com"
+}
+{
+	"_id" : ObjectId("62f1f2f875a53992a62c229a"),
+	"FirstName" : "Rachael",
+	"DOB" : "1990-08-08",
+	"phone" : "1234567890"
+}
+> db.student.findOne({"FirstName":"Radhika"})
+{
+	"_id" : ObjectId("62f1f2f875a53992a62c2299"),
+	"FirstName" : "Radhika",
+	"LastName" : "Sharma",
+	"DOB" : "1995-09-09",
+	"email" : "rsharma@gmail.com"
+}
+> db.student.insert({"FirstName":"Radhika"})
+WriteResult({ "nInserted" : 1 })
+> db.student.findOne({"FirstName":"Radhika"})
+{
+	"_id" : ObjectId("62f1f2f875a53992a62c2299"),
+	"FirstName" : "Radhika",
+	"LastName" : "Sharma",
+	"DOB" : "1995-09-09",
+	"email" : "rsharma@gmail.com"
+}
+> db.student.find()
+{ "_id" : ObjectId("62f1f1c375a53992a62c2297") }
+{ "_id" : ObjectId("62f1f25075a53992a62c2298"), "name" : "Chaaru", "details" : { "age" : 19, "standard" : "X" }, "Batch" : [ { "size" : "small", "qty" : 15 }, { "size" : "Medium", "qty" : 25 } ], "category" : "Science" }
+{ "_id" : ObjectId("62f1f2f875a53992a62c2299"), "FirstName" : "Radhika", "LastName" : "Sharma", "DOB" : "1995-09-09", "email" : "rsharma@gmail.com" }
+{ "_id" : ObjectId("62f1f2f875a53992a62c229a"), "FirstName" : "Rachael", "DOB" : "1990-08-08", "phone" : "1234567890" }
+{ "_id" : ObjectId("62f1f37b75a53992a62c229b"), "name" : "Devi", "details" : { "age" : 36, "standard" : "ME" } }
+{ "_id" : ObjectId("62f1f37b75a53992a62c229c"), "name" : "Rashmi", "category" : "Medicine" }
+{ "_id" : ObjectId("62f1f92b75a53992a62c229d"), "FirstName" : "Radhika" }
+> db.student.find({"FirstName":"Radhika"})
+{ "_id" : ObjectId("62f1f2f875a53992a62c2299"), "FirstName" : "Radhika", "LastName" : "Sharma", "DOB" : "1995-09-09", "email" : "rsharma@gmail.com" }
+{ "_id" : ObjectId("62f1f92b75a53992a62c229d"), "FirstName" : "Radhika" }
+> db.student.find({"FirstName":"Radhika"})
+{ "_id" : ObjectId("62f1f2f875a53992a62c2299"), "FirstName" : "Radhika", "LastName" : "Sharma", "DOB" : "1995-09-09", "email" : "rsharma@gmail.com" }
+{ "_id" : ObjectId("62f1f92b75a53992a62c229d"), "FirstName" : "Radhika" }
+> db.emp.find()
+{ "_id" : ObjectId("62f1ef4c75a53992a62c2294"), "name" : "Uma" }
+{ "_id" : ObjectId("62f1ef7a75a53992a62c2295"), "name" : "Rajesh", "age" : 25 }
+> db.emp.update({"name":"Rajesh"},{$set:{"age":27}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.emp.find()
+{ "_id" : ObjectId("62f1ef4c75a53992a62c2294"), "name" : "Uma" }
+{ "_id" : ObjectId("62f1ef7a75a53992a62c2295"), "name" : "Rajesh", "age" : 27 }
+> db.emp.update({"name":"Uma"},{$set:{"age":27}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.emp.find()
+{ "_id" : ObjectId("62f1ef4c75a53992a62c2294"), "name" : "Uma", "age" : 27 }
+{ "_id" : ObjectId("62f1ef7a75a53992a62c2295"), "name" : "Rajesh", "age" : 27 }
+> db.emp.update({"name":"Uma"},{$set:{"name":"Vivek"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.emp.find()
+{ "_id" : ObjectId("62f1ef4c75a53992a62c2294"), "name" : "Vivek", "age" : 27 }
+{ "_id" : ObjectId("62f1ef7a75a53992a62c2295"), "name" : "Rajesh", "age" : 27 }
+> db.emp.insert({"name":"Vivek"})
+WriteResult({ "nInserted" : 1 })
+> db.emp.find()
+{ "_id" : ObjectId("62f1ef4c75a53992a62c2294"), "name" : "Vivek", "age" : 27 }
+{ "_id" : ObjectId("62f1ef7a75a53992a62c2295"), "name" : "Rajesh", "age" : 27 }
+{ "_id" : ObjectId("62f1fb7b75a53992a62c229e"), "name" : "Vivek" }
+> db.emp.update({"name":"Vivek"},{$set:{"name":"Uma"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.emp.find()
+{ "_id" : ObjectId("62f1ef4c75a53992a62c2294"), "name" : "Uma", "age" : 27 }
+{ "_id" : ObjectId("62f1ef7a75a53992a62c2295"), "name" : "Rajesh", "age" : 27 }
+{ "_id" : ObjectId("62f1fb7b75a53992a62c229e"), "name" : "Vivek" }
+> db.emp.save({"_id":ObjectId("62f1fb7b75a53992a62c229e"),"FirstName":"Vivek","age":21})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.emp.find()
+{ "_id" : ObjectId("62f1ef4c75a53992a62c2294"), "name" : "Uma", "age" : 27 }
+{ "_id" : ObjectId("62f1ef7a75a53992a62c2295"), "name" : "Rajesh", "age" : 27 }
+{ "_id" : ObjectId("62f1fb7b75a53992a62c229e"), "FirstName" : "Vivek", "age" : 21 }
+> db.emp.save({"FirstName":"Raj","age":21})
+WriteResult({ "nInserted" : 1 })
+> db.emp.find()
+{ "_id" : ObjectId("62f1ef4c75a53992a62c2294"), "name" : "Uma", "age" : 27 }
+{ "_id" : ObjectId("62f1ef7a75a53992a62c2295"), "name" : "Rajesh", "age" : 27 }
+{ "_id" : ObjectId("62f1fb7b75a53992a62c229e"), "FirstName" : "Vivek", "age" : 21 }
+{ "_id" : ObjectId("62f1fcd275a53992a62c229f"), "FirstName" : "Raj", "age" : 21 }
+> db.emp.remove({"FirstName":"Vivek"})
+WriteResult({ "nRemoved" : 1 })
+> db.emp.find()
+{ "_id" : ObjectId("62f1ef4c75a53992a62c2294"), "name" : "Uma", "age" : 27 }
+{ "_id" : ObjectId("62f1ef7a75a53992a62c2295"), "name" : "Rajesh", "age" : 27 }
+{ "_id" : ObjectId("62f1fcd275a53992a62c229f"), "FirstName" : "Raj", "age" : 21 }
+> db.emp.save({"FirstName":"Raj","age":21})
+WriteResult({ "nInserted" : 1 })
+> db.emp.find()
+{ "_id" : ObjectId("62f1ef4c75a53992a62c2294"), "name" : "Uma", "age" : 27 }
+{ "_id" : ObjectId("62f1ef7a75a53992a62c2295"), "name" : "Rajesh", "age" : 27 }
+{ "_id" : ObjectId("62f1fcd275a53992a62c229f"), "FirstName" : "Raj", "age" : 21 }
+{ "_id" : ObjectId("62f1fd9c75a53992a62c22a0"), "FirstName" : "Raj", "age" : 21 }
+> db.emp.remove({"FirstName":"Raj"})
+WriteResult({ "nRemoved" : 2 })
+> db.emp.find()
+{ "_id" : ObjectId("62f1ef4c75a53992a62c2294"), "name" : "Uma", "age" : 27 }
+{ "_id" : ObjectId("62f1ef7a75a53992a62c2295"), "name" : "Rajesh", "age" : 27 }
+> db.emp.remove({})
+WriteResult({ "nRemoved" : 2 })
+> db.emp.find()
+> db.emp.remove({"FirstName":"Raj"})
+WriteResult({ "nRemoved" : 0 })
+> db.emp.save({"FirstName":"Raj","age":21})
+WriteResult({ "nInserted" : 1 })
+> db.emp.save({"FirstName":"Raj","age":21})
+WriteResult({ "nInserted" : 1 })
+> db.emp.save({"FirstName":"Raj","age":21})
+WriteResult({ "nInserted" : 1 })
+> db.emp.find()
+{ "_id" : ObjectId("62f1fe0c75a53992a62c22a1"), "FirstName" : "Raj", "age" : 21 }
+{ "_id" : ObjectId("62f1fe0e75a53992a62c22a2"), "FirstName" : "Raj", "age" : 21 }
+{ "_id" : ObjectId("62f1fe0f75a53992a62c22a3"), "FirstName" : "Raj", "age" : 21 }
+> db.emp.remove()
+Error: remove needs a query :
+DBCollection.prototype._parseRemove@src/mongo/shell/collection.js:364:15
+DBCollection.prototype.remove@src/mongo/shell/collection.js:394:18
+@(shell):1:1
+> db.emp.remove({})
+WriteResult({ "nRemoved" : 3 })
+> show collections
+emp
+student
+> db.emp.find()
+> var employees = [{ "_id" : ObjectId("62f1ef4c75a53992a62c2294"), "name" : "Uma", "age" : 27 }]
+> { "_id" : ObjectId("62f1ef7a75a53992a62c2295"), "name" : "Rajesh", "age" : 27 }
+SyntaxError: unexpected token: ':' :
+@(shell):1:8
+> { "_id" : ObjectId("62f1fcd275a53992a62c229f"), "FirstName" : "Raj", "age" : 21 }
+SyntaxError: unexpected token: ':' :
+@(shell):1:8
+> { "_id" : ObjectId("62f1fd9c75a53992a62c22a0"), "FirstName" : "Raj", "age" : 21 }
+SyntaxError: unexpected token: ':' :
+@(shell):1:8
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> db.emp.find()
+> var employees = [{"emp_id":101,"name":"James","age":25},{"emp_id"=191,"name":"Jacob"},{"emp_id":201,"name":"Maya","age":23},{"emp_id":205,"name":"Ritu","age":25}]
+SyntaxError: missing : after property id :
+@(shell):1:65
+> var employees = [{"emp_id":101,"name":"James","age":25},{"emp_id":191,"name":"Jacob"},{"emp_id":201,"name":"Maya","age":23},{"emp_id":205,"name":"Ritu","age":25}]
+> db.emp.insert(employees)
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 4,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.emp.find()
+{ "_id" : ObjectId("62f2183a75a53992a62c22a4"), "emp_id" : 101, "name" : "James", "age" : 25 }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a5"), "emp_id" : 191, "name" : "Jacob" }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a6"), "emp_id" : 201, "name" : "Maya", "age" : 23 }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a7"), "emp_id" : 205, "name" : "Ritu", "age" : 25 }
+> db.emp.insert({"emp_id":111,"name":"James"})
+WriteResult({ "nInserted" : 1 })
+> db.emp.find()
+{ "_id" : ObjectId("62f2183a75a53992a62c22a4"), "emp_id" : 101, "name" : "James", "age" : 25 }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a5"), "emp_id" : 191, "name" : "Jacob" }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a6"), "emp_id" : 201, "name" : "Maya", "age" : 23 }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a7"), "emp_id" : 205, "name" : "Ritu", "age" : 25 }
+{ "_id" : ObjectId("62f218b375a53992a62c22a8"), "emp_id" : 111, "name" : "James" }
+> db.emp.find({"name":"James"})
+{ "_id" : ObjectId("62f2183a75a53992a62c22a4"), "emp_id" : 101, "name" : "James", "age" : 25 }
+{ "_id" : ObjectId("62f218b375a53992a62c22a8"), "emp_id" : 111, "name" : "James" }
+> 
+> 
+> 
+> db.emp.find({"emp_id":{$lt:200}})
+{ "_id" : ObjectId("62f2183a75a53992a62c22a4"), "emp_id" : 101, "name" : "James", "age" : 25 }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a5"), "emp_id" : 191, "name" : "Jacob" }
+{ "_id" : ObjectId("62f218b375a53992a62c22a8"), "emp_id" : 111, "name" : "James" }
+> 
+> 
+> db.emp.find({"emp_id":{$lte:201}})
+{ "_id" : ObjectId("62f2183a75a53992a62c22a4"), "emp_id" : 101, "name" : "James", "age" : 25 }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a5"), "emp_id" : 191, "name" : "Jacob" }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a6"), "emp_id" : 201, "name" : "Maya", "age" : 23 }
+{ "_id" : ObjectId("62f218b375a53992a62c22a8"), "emp_id" : 111, "name" : "James" }
+> 
+> 
+> 
+> 
+> 
+> db.emp.find({"emp_id":{$gt:201}})
+{ "_id" : ObjectId("62f2183a75a53992a62c22a7"), "emp_id" : 205, "name" : "Ritu", "age" : 25 }
+> db.emp.find({"emp_id":{$gte:201}})
+{ "_id" : ObjectId("62f2183a75a53992a62c22a6"), "emp_id" : 201, "name" : "Maya", "age" : 23 }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a7"), "emp_id" : 205, "name" : "Ritu", "age" : 25 }
+> 
+> 
+> 
+> db.emp.find({"emp_id":{$ne:201}})
+{ "_id" : ObjectId("62f2183a75a53992a62c22a4"), "emp_id" : 101, "name" : "James", "age" : 25 }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a5"), "emp_id" : 191, "name" : "Jacob" }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a7"), "emp_id" : 205, "name" : "Ritu", "age" : 25 }
+{ "_id" : ObjectId("62f218b375a53992a62c22a8"), "emp_id" : 111, "name" : "James" }
+> 
+> 
+> db.emp.find()
+{ "_id" : ObjectId("62f2183a75a53992a62c22a4"), "emp_id" : 101, "name" : "James", "age" : 25 }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a5"), "emp_id" : 191, "name" : "Jacob" }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a6"), "emp_id" : 201, "name" : "Maya", "age" : 23 }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a7"), "emp_id" : 205, "name" : "Ritu", "age" : 25 }
+{ "_id" : ObjectId("62f218b375a53992a62c22a8"), "emp_id" : 111, "name" : "James" }
+> 
+> 
+> db.emp.find({"name":{$in:["Jacob","Maya"]}})
+{ "_id" : ObjectId("62f2183a75a53992a62c22a5"), "emp_id" : 191, "name" : "Jacob" }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a6"), "emp_id" : 201, "name" : "Maya", "age" : 23 }
+> 
+> 
+> 
+> db.emp.find({"emp_id":{$nin:[111,191,205]}})
+{ "_id" : ObjectId("62f2183a75a53992a62c22a4"), "emp_id" : 101, "name" : "James", "age" : 25 }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a6"), "emp_id" : 201, "name" : "Maya", "age" : 23 }
+> 
+> 
+> db.emp.update({"name":"James"}, {$set:{"course":"Java"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.emp.find()
+{ "_id" : ObjectId("62f2183a75a53992a62c22a4"), "emp_id" : 101, "name" : "James", "age" : 25, "course" : "Java" }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a5"), "emp_id" : 191, "name" : "Jacob" }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a6"), "emp_id" : 201, "name" : "Maya", "age" : 23 }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a7"), "emp_id" : 205, "name" : "Ritu", "age" : 25 }
+{ "_id" : ObjectId("62f218b375a53992a62c22a8"), "emp_id" : 111, "name" : "James" }
+> db.emp.update({"name":"Jacob"}, {$set:{"course":"Python"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.emp.update({"emp_id":111}, {$set:{"course":"Java"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.emp.update({"emp_id":201}, {$set:{"course":"C++"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.emp.update({"emp_id":205}, {$set:{"course":"Java"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.emp.find()
+{ "_id" : ObjectId("62f2183a75a53992a62c22a4"), "emp_id" : 101, "name" : "James", "age" : 25, "course" : "Java" }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a5"), "emp_id" : 191, "name" : "Jacob", "course" : "Python" }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a6"), "emp_id" : 201, "name" : "Maya", "age" : 23, "course" : "C++" }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a7"), "emp_id" : 205, "name" : "Ritu", "age" : 25, "course" : "Java" }
+{ "_id" : ObjectId("62f218b375a53992a62c22a8"), "emp_id" : 111, "name" : "James", "course" : "Java" }
+> 
+> 
+> 
+> db.emp.find({$and:[{"course":"Java"},{"name":"James"}]})
+{ "_id" : ObjectId("62f2183a75a53992a62c22a4"), "emp_id" : 101, "name" : "James", "age" : 25, "course" : "Java" }
+{ "_id" : ObjectId("62f218b375a53992a62c22a8"), "emp_id" : 111, "name" : "James", "course" : "Java" }
+> 
+> 
+> 
+> db.emp.find({$or:[{"course":"Java"},{"name":"James"}]})
+{ "_id" : ObjectId("62f2183a75a53992a62c22a4"), "emp_id" : 101, "name" : "James", "age" : 25, "course" : "Java" }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a7"), "emp_id" : 205, "name" : "Ritu", "age" : 25, "course" : "Java" }
+{ "_id" : ObjectId("62f218b375a53992a62c22a8"), "emp_id" : 111, "name" : "James", "course" : "Java" }
+> 
+> 
+> 
+> db.emp.find({$nor:[{"course":"Java"},{"name":"James"}]})
+{ "_id" : ObjectId("62f2183a75a53992a62c22a5"), "emp_id" : 191, "name" : "Jacob", "course" : "Python" }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a6"), "emp_id" : 201, "name" : "Maya", "age" : 23, "course" : "C++" }
+> 
+> 
+> db.emp.find({"emp_id":{$not:{$gt:200}}})
+{ "_id" : ObjectId("62f2183a75a53992a62c22a4"), "emp_id" : 101, "name" : "James", "age" : 25, "course" : "Java" }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a5"), "emp_id" : 191, "name" : "Jacob", "course" : "Python" }
+{ "_id" : ObjectId("62f218b375a53992a62c22a8"), "emp_id" : 111, "name" : "James", "course" : "Java" }
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> 
+> db.emp.find()
+{ "_id" : ObjectId("62f2183a75a53992a62c22a4"), "emp_id" : 101, "name" : "James", "age" : 25, "course" : "Java" }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a5"), "emp_id" : 191, "name" : "Jacob", "course" : "Python" }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a6"), "emp_id" : 201, "name" : "Maya", "age" : 23, "course" : "C++" }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a7"), "emp_id" : 205, "name" : "Ritu", "age" : 25, "course" : "Java" }
+{ "_id" : ObjectId("62f218b375a53992a62c22a8"), "emp_id" : 111, "name" : "James", "course" : "Java" }
+> 
+> 
+> 
+> 
+> db.emp.find({},{"name":1,"emp_id":1,"_id":0})
+{ "emp_id" : 101, "name" : "James" }
+{ "emp_id" : 191, "name" : "Jacob" }
+{ "emp_id" : 201, "name" : "Maya" }
+{ "emp_id" : 205, "name" : "Ritu" }
+{ "emp_id" : 111, "name" : "James" }
+> db.emp.find({},{"name":1,"emp_id":1})
+{ "_id" : ObjectId("62f2183a75a53992a62c22a4"), "emp_id" : 101, "name" : "James" }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a5"), "emp_id" : 191, "name" : "Jacob" }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a6"), "emp_id" : 201, "name" : "Maya" }
+{ "_id" : ObjectId("62f2183a75a53992a62c22a7"), "emp_id" : 205, "name" : "Ritu" }
+{ "_id" : ObjectId("62f218b375a53992a62c22a8"), "emp_id" : 111, "name" : "James" }

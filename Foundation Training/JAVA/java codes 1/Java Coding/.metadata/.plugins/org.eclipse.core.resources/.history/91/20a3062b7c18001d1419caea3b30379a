@@ -1,0 +1,16 @@
+package com.example.newapplication;
+
+public class App {
+	
+	
+	/*
+	 * Project -> main function -> JVM runs the main function
+	 * If there is no main function then that class/project is not runnable
+	 * 
+	 * */
+	
+	public void print() {
+		System.out.println("Hi");
+	}
+
+}

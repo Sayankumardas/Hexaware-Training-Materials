@@ -1,0 +1,11 @@
+1 . First right click inside the folder u want to add and select gitbash here
+
+2. then run git init
+
+3. then goto git and create a repo 
+
+4. then type git commit -m "message"
+
+5. then type or copy paste the git remote add to gitbash cmd
+
+6. now push your code by typing git push origin master or git push origin branchname

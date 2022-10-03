@@ -1,0 +1,16 @@
+package com.example.basic.variables;
+
+public class Sample {
+	
+	private String name; //instance variable
+	
+	private static int id; //class/static variable
+	
+	
+	public void hello() {
+		int sample_id = id+100; //local-variable
+		
+		System.out.println("Hello "+this.name+" your id is : "+sample_id);
+	}
+
+}

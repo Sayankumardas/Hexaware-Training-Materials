@@ -1,0 +1,14 @@
+package com.example.basic.access.specifiers;
+
+public class DefaultTesting {
+	
+	public static void maain(String[] args) {
+		
+		
+		Person person = new Person();
+		
+		System.out.println(person.age); //since it has default visibility 
+		
+	}
+
+}

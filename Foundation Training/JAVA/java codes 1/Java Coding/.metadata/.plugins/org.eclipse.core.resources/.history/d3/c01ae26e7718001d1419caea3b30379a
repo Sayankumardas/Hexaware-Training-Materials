@@ -1,0 +1,13 @@
+package com.example.definition.platform.independent;
+
+public class Person {
+	
+	public static void main(String[] args) {
+		
+		System.out.println("We are in Person Class");
+		
+		System.out.printf("Hey There");
+		
+	}
+
+}

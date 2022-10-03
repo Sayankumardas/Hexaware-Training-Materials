@@ -1,0 +1,26 @@
+package com.example.basic.access.conditionals;
+
+public class ConditionalMain {
+	
+	public static void main(String[] args) {
+		
+		
+		
+		
+	}
+	
+	
+	private void checkValue(int num) {
+		
+		if(num>=0 && num<10)
+			System.out.println(num + "is Single Digit");
+		else if(num>=10 && num<100)
+			System.out.println(num+ "id Double Digit");
+		else
+			System.out.println("Number entered is either negative or >= 100");
+		
+		
+		
+	}
+
+}

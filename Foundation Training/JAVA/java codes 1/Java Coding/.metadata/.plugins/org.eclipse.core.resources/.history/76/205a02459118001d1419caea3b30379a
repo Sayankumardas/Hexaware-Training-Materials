@@ -1,0 +1,16 @@
+package com.example.basic.access.specifiers;
+
+public class Person {
+	
+	private String name="James"; // can be accessed within the class only
+	protected String id="123344444";
+	int age=25; //default access-specifier
+	public String location="Mumbai";
+	
+	
+	public void hello() {
+		System.out.println(this.name);
+	}
+	
+
+}

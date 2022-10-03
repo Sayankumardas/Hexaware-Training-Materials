@@ -1,0 +1,5 @@
+package com.example.newapplication.access.specifier;
+
+public class AppAccess {
+
+}

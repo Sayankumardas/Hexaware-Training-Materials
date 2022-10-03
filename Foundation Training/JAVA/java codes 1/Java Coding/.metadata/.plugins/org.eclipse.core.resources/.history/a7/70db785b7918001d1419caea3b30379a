@@ -1,0 +1,30 @@
+package com.example.definition.interpreter.jit;
+
+public class Addition {
+	
+	
+	public static void main(String[] args) {
+		
+		int local_varibale=5;
+		
+		Addition add = new Addition(); //reference variable
+		add.hello();
+		
+		System.out.println(add(2,5));
+		System.out.println(add(6,7));
+		System.out.println(add(12,34));
+		System.out.println(add(89,45));
+		System.out.println(add(123,345));
+		
+		
+	}
+	
+	public void hello() {
+		System.out.println("Hello World");
+	}
+	
+	private static int add(int a ,int b) {
+		return a+b;
+	}
+
+}

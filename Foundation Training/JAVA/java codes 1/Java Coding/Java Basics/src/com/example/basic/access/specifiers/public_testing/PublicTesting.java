@@ -1,0 +1,14 @@
+package com.example.basic.access.specifiers.public_testing;
+
+import com.example.basic.access.specifiers.Person;
+
+public class PublicTesting {
+	
+	public static void main(String[] args) {
+		
+		Person person = new Person();
+		System.out.println(person.location); // since location is public
+		
+	}
+
+}

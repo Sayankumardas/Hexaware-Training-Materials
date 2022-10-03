@@ -1,0 +1,13 @@
+package com.example.basic.variables;
+
+public class Sample {
+	
+	private String name;
+	private static int id;
+	
+	
+	public void hello() {
+		System.out.println("Hello "+this.name);
+	}
+
+}

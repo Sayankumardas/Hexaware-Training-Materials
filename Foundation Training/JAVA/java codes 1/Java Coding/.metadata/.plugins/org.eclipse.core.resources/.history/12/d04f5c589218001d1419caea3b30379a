@@ -1,0 +1,20 @@
+package com.example.basic.access.specifiers;
+
+import com.example.basic.access.specifiers.Person;
+
+public class PersonChild extends Person {
+	
+	
+	static Person p;
+	
+	
+	public static void main(String[] args) {
+		
+		p = new Person();
+		p.id
+		
+		
+	}
+	
+
+}
